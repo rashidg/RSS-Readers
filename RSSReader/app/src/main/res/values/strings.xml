@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">RSS</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="link">http://socar.az/socar/az/feed</string>
+    <string name="title_activity_news">NewsActivity</string>
+</resources>
