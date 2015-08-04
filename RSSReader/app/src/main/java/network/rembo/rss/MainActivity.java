@@ -30,6 +30,7 @@ public class MainActivity extends Activity implements Serializable {
     Button btnParse;
     ListView listApps;
     String xmlData;
+    ArrayList<Application> allApps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,41 @@ public class MainActivity extends Activity implements Serializable {
         listApps = (ListView) findViewById(R.id.listApps);
 
 
+        {
+            ParseApplications parse = new ParseApplications(xmlData);
+            boolean operationStatus = parse.process();
+            if (operationStatus) {
+                allApps = parse.getApplications(); // = new ArrayList<Application>()
+                Application ap1 = new Application();
+                /*ap1.setPubDate("2015");
+                ap1.setDescription("asd");
+                ap1.setLink("google.com");
+                ap1.setTitle("OH YEAH");
+                allApps.add(ap1);*/
+                ArrayAdapter<Application> adapter = new ArrayAdapter<Application>(MainActivity.this, R.layout.list_items, allApps);
+
+/*
+                    ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, allApps) {
+                        @Override
+                        public View getView(int position, View convertView, ViewGroup parent) {
+                            View view = super.getView(position, convertView, parent);
+                            TextView text1 = (TextView) view.findViewById(android.R.id.text1);
+                            TextView text2 = (TextView) view.findViewById(android.R.id.text2);
+
+                            text1.setText(allApps.get(position).getName());
+                            text2.setText(persons.get(position).getAge());
+                            return view;
+                        }
+                    };
+*/
+                listApps.setVisibility(listApps.VISIBLE);
+                listApps.setAdapter(adapter);
+
+            } else {
+                Log.d("MainActivity", "Error parsing file");
+            }
+        }
+
 
         listApps.setClickable(true);
         listApps.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -47,7 +83,6 @@ public class MainActivity extends Activity implements Serializable {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
 
                 Application current_app = (Application) listApps.getItemAtPosition(position);
-                Log.d("asd", "dsa");
                 Intent i = new Intent(listApps.getContext(), NewsActivity.class);
                 i.putExtra("app11", current_app);
                 startActivity(i);
@@ -59,16 +94,15 @@ public class MainActivity extends Activity implements Serializable {
             @Override
             public void onClick(View v) {
                 ParseApplications parse = new ParseApplications(xmlData);
-                boolean operationStatus = true; //parse.process();
+                boolean operationStatus = parse.process();
                 if (operationStatus) {
-                    ArrayList<Application> allApps = new ArrayList<Application>();// = parse.getApplications();
-                    Application ap1 = new Application();
+                    allApps = parse.getApplications(); // = new ArrayList<Application>();
+                    /*Application ap1 = new Application();
                     ap1.setPubDate("2015");
                     ap1.setDescription("asd");
                     ap1.setLink("google.com");
                     ap1.setTitle("OH YEAH");
-                    allApps.add(ap1);
-                    Log.d("ASDFGHJASDFGHASDFGHASDFGSDFGHDFG", new Integer(allApps.size()).toString());
+                    allApps.add(ap1);*/
                     ArrayAdapter<Application> adapter = new ArrayAdapter<Application>(MainActivity.this, R.layout.list_items, allApps);
 /*
                     ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, allApps) {
@@ -94,29 +128,17 @@ public class MainActivity extends Activity implements Serializable {
 
             }
         });
-
-        //new DownloadData().execute("http://socar.az/socar/az/feed");
+        String lnk = getIntent().getSerializableExtra("link").toString();
+        new DownloadData().execute(lnk);
     }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void search_button(View V){
+        Intent i = new Intent(getApplicationContext(), SearchActivity.class);
+        i.putExtra("apps", allApps);
+        startActivity(i);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     private class DownloadData extends AsyncTask<String,Void, String>{
 

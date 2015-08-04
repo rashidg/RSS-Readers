@@ -59,6 +59,7 @@ public class ParseApplications {
                         } else if(tagName.equalsIgnoreCase("description")) {
                             currentRecord.setDescription(textValue);
                         } else if(tagName.equalsIgnoreCase("pubDate")) {
+                            textValue = textValue.substring(0,16);
                             currentRecord.setPubDate(textValue);
                         }
 

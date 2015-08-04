@@ -1,0 +1,51 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="50dp"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="network.rembo.rss.LangActivity"
+    android:transitionGroup="true"
+    android:background="@drawable/bg">
+
+
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="270dp"
+        android:id="@+id/imageView"
+        android:background="@drawable/socarlogo" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="40dp"
+        >
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:id="@+id/button_aze"
+            android:background="@drawable/aze"
+            android:elegantTextHeight="false"
+            android:onClick="aze_button"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="15dp"
+            style="?android:attr/borderlessButtonStyle" />
+
+        <Button
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:id="@+id/button_brit"
+            android:background="@drawable/brit"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="45dp"
+            android:layout_marginStart="197dp"
+            android:layout_alignTop="@+id/button_aze"
+            android:onClick="brit_button"
+            android:layout_gravity="bottom"
+            style="?android:attr/borderlessButtonStyle" />
+    </TableRow>
+
+</TableLayout>
