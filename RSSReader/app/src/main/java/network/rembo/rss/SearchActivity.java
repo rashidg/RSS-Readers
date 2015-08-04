@@ -55,9 +55,6 @@ public class SearchActivity extends Activity {
                             int day = Integer.parseInt(cur.getPubDate().substring(5,7));
                             int month = getMonthNum(cur.getPubDate().substring(8, 11));
                             int year = Integer.parseInt(cur.getPubDate().substring(12, 16));
-                            Log.d("pudDate ==> ", cur.getPubDate()); //getPubDate <-----------------
-                            Log.d(Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year),
-                                    "||| " + Integer.toString(chosenDay) + "/" + Integer.toString(chosenMonth) + "/" + Integer.toString(chosenYear));
                             if (day == chosenDay && month == chosenMonth && year == chosenYear)
                                 chosenApps.add(cur);
                         }

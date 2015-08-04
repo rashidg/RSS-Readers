@@ -29,7 +29,7 @@ public class MainActivity extends Activity implements Serializable {
 
     Button btnParse;
     ListView listApps;
-    String xmlData;
+    String xmlData = null;
     ArrayList<Application> allApps;
 
     @Override
@@ -39,42 +39,8 @@ public class MainActivity extends Activity implements Serializable {
         btnParse = (Button) findViewById(R.id.btnParse);
         listApps = (ListView) findViewById(R.id.listApps);
 
-
-        {
-            ParseApplications parse = new ParseApplications(xmlData);
-            boolean operationStatus = parse.process();
-            if (operationStatus) {
-                allApps = parse.getApplications(); // = new ArrayList<Application>()
-                Application ap1 = new Application();
-                /*ap1.setPubDate("2015");
-                ap1.setDescription("asd");
-                ap1.setLink("google.com");
-                ap1.setTitle("OH YEAH");
-                allApps.add(ap1);*/
-                ArrayAdapter<Application> adapter = new ArrayAdapter<Application>(MainActivity.this, R.layout.list_items, allApps);
-
-/*
-                    ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, allApps) {
-                        @Override
-                        public View getView(int position, View convertView, ViewGroup parent) {
-                            View view = super.getView(position, convertView, parent);
-                            TextView text1 = (TextView) view.findViewById(android.R.id.text1);
-                            TextView text2 = (TextView) view.findViewById(android.R.id.text2);
-
-                            text1.setText(allApps.get(position).getName());
-                            text2.setText(persons.get(position).getAge());
-                            return view;
-                        }
-                    };
-*/
-                listApps.setVisibility(listApps.VISIBLE);
-                listApps.setAdapter(adapter);
-
-            } else {
-                Log.d("MainActivity", "Error parsing file");
-            }
-        }
-
+        String lnk = getIntent().getSerializableExtra("link").toString();
+        new DownloadData().execute(lnk);
 
         listApps.setClickable(true);
         listApps.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -97,14 +63,9 @@ public class MainActivity extends Activity implements Serializable {
                 boolean operationStatus = parse.process();
                 if (operationStatus) {
                     allApps = parse.getApplications(); // = new ArrayList<Application>();
-                    /*Application ap1 = new Application();
-                    ap1.setPubDate("2015");
-                    ap1.setDescription("asd");
-                    ap1.setLink("google.com");
-                    ap1.setTitle("OH YEAH");
-                    allApps.add(ap1);*/
                     ArrayAdapter<Application> adapter = new ArrayAdapter<Application>(MainActivity.this, R.layout.list_items, allApps);
-/*
+
+                    /*
                     ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_2, android.R.id.text1, allApps) {
                         @Override
                         public View getView(int position, View convertView, ViewGroup parent) {
@@ -118,6 +79,7 @@ public class MainActivity extends Activity implements Serializable {
                         }
                     };
 */
+
                     listApps.setVisibility(listApps.VISIBLE);
                     listApps.setAdapter(adapter);
 
@@ -128,8 +90,7 @@ public class MainActivity extends Activity implements Serializable {
 
             }
         });
-        String lnk = getIntent().getSerializableExtra("link").toString();
-        new DownloadData().execute(lnk);
+
     }
 
 
@@ -158,6 +119,8 @@ public class MainActivity extends Activity implements Serializable {
         protected void onPostExecute(String result) {
             Log.d("OnPostExecute", myXmlData);
             xmlData = myXmlData;
+            Button btn = (Button) findViewById(R.id.btnParse);
+            btn.performClick();
         }
 
         private String downloadXML(String theUrl) throws IOException {
