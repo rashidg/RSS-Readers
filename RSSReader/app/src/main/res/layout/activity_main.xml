@@ -14,27 +14,29 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Refresh" />
+        android:text="Refresh"
+        android:visibility="invisible"/>
 
     <ListView
         android:id="@+id/listApps"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_below="@id/btnParse"
-        android:layout_alignParentRight="@+id/btnParse"
         android:visibility="invisible" >
     </ListView>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Search"
-        android:id="@+id/button2"
-        android:layout_above="@+id/listApps"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:onClick="search_button" />
 
+    <!--menu xmlns:android="http://schemas.android.com/apk/res/android" >
+        <item
+            android:id="@+id/refresh_option"
+            android:icon="@drawable/action_refresh"
+            android:showAsAction="ifRoom"
+            android:title="Refresh"/>
+        <item
+            android:id="@+id/about_option"
+            android:icon="@drawable/action_about"
+            android:showAsAction="ifRoom"
+            android:title="About Me"/>
+    </menu!-->
 
 </RelativeLayout>
