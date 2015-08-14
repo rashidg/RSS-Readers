@@ -3,6 +3,7 @@ package network.rembo.rss;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.app.Activity;
@@ -13,12 +14,13 @@ import android.net.Uri;
 import android.content.Intent;
 import org.w3c.dom.Text;
 
-public class NewsActivity extends ActionBarActivity {
+public class StoredNewsActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+        Log.d("STOREDNEWSACTIVITY ===>" , "here");
         TextView tv = (TextView) findViewById(R.id.textView);
         Application app = (Application) getIntent().getSerializableExtra("app11");
         tv.setText(app.getDescription());
@@ -29,7 +31,7 @@ public class NewsActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_news, menu);
+        getMenuInflater().inflate(R.menu.menu_stored_news, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -45,10 +47,11 @@ public class NewsActivity extends ActionBarActivity {
             startActivity(browserIntent);
             return true;
         }
-        else if (id == R.id.saveNews){
+        else if (id == R.id.deleteNews){
             DBHandler handler = new DBHandler(this,null,null,1);
             Application app = (Application) getIntent().getSerializableExtra("app11");
-            handler.addNews(app);
+            handler.deleteNews(app);
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

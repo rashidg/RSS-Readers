@@ -8,6 +8,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -88,6 +90,17 @@ public class MainActivity extends ActionBarActivity implements Serializable {
 
                 } else {
                     Log.d("MainActivity", "Error parsing file");
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
+                    builder1.setMessage("Couldn't get the feed.\nNo internet connection.");
+                    builder1.setCancelable(true);
+                    builder1.setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
                 }
 
 
@@ -120,13 +133,12 @@ public class MainActivity extends ActionBarActivity implements Serializable {
             btnParse.performClick();
             return true;
         }
+        else if (id == R.id.memory){
+            Intent i = new Intent(this, StorageActivity.class);
+            startActivity(i);
+            return true;
+        }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void search_button(View V){
-        Intent i = new Intent(getApplicationContext(), SearchActivity.class);
-        i.putExtra("apps", allApps);
-        startActivity(i);
     }
 
 
@@ -195,4 +207,3 @@ public class MainActivity extends ActionBarActivity implements Serializable {
     }
 
 }
-

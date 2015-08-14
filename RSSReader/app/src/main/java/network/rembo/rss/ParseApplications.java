@@ -45,7 +45,7 @@ public class ParseApplications {
                     }
                 } else if(eventType == XmlPullParser.TEXT) {
                     textValue = xpp.getText();
-                    textValue = textValue.replace("<br>","");
+                    //textValue = textValue.replace("<br>","\n");
                 } else if(eventType == XmlPullParser.END_TAG) {
                     if(inEntry) {
                         if(tagName.equalsIgnoreCase("item")) {
@@ -53,12 +53,16 @@ public class ParseApplications {
                             inEntry = false;
                         }
                         if(tagName.equalsIgnoreCase("title")) {
+                            textValue = textValue.replace("<br>","");
                             currentRecord.setTitle(textValue);
                         } else if(tagName.equalsIgnoreCase("link")) {
+                            textValue = textValue.replace("<br>","");
                             currentRecord.setLink(textValue);
                         } else if(tagName.equalsIgnoreCase("description")) {
+                            textValue = textValue.replace("<br>","\n");
                             currentRecord.setDescription(textValue);
                         } else if(tagName.equalsIgnoreCase("pubDate")) {
+                            textValue = textValue.replace("<br>","");
                             textValue = textValue.substring(0,16);
                             currentRecord.setPubDate(textValue);
                         }

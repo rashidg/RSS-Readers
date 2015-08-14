@@ -1,11 +1,14 @@
 <resources>
-    <string name="app_name">RSS</string>
-
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">RSS Reader</string>
     <string name="action_settings">Settings</string>
     <string name="link">http://socar.az/socar/az/feed</string>
-    <string name="title_activity_news">NewsActivity</string>
-    <string name="title_activity_lang">LangActivity</string>
-    <string name="title_activity_search">SearchActivity</string>
-    <string name="title_activity_results">ResultsActivity</string>>
+    <string name="title_activity_main">RSS Reader</string>
+    <string name="title_activity_news">RSS Reader</string>
+    <string name="title_activity_lang">RSS Reader</string>
+    <string name="title_activity_search">RSS Reader</string>
+    <string name="title_activity_results">RSS Reader</string>
+    <string name="title_activity_storage">StorageActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_stored_news">StoredNewsActivity</string>>
 </resources>
