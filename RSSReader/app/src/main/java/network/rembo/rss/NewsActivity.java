@@ -19,8 +19,12 @@ public class NewsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
-        TextView tv = (TextView) findViewById(R.id.textView);
+
+        DBHandler handler = new DBHandler(this,null,null,1);
         Application app = (Application) getIntent().getSerializableExtra("app11");
+        handler.addNews(app);
+
+        TextView tv = (TextView) findViewById(R.id.textView);
         tv.setText(app.getDescription());
         TextView tv2 = (TextView) findViewById(R.id.textView2);
         tv2.setText(app.getTitle());
@@ -44,11 +48,6 @@ public class NewsActivity extends ActionBarActivity {
             Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse(app.getLink()));
             startActivity(browserIntent);
             return true;
-        }
-        else if (id == R.id.saveNews){
-            DBHandler handler = new DBHandler(this,null,null,1);
-            Application app = (Application) getIntent().getSerializableExtra("app11");
-            handler.addNews(app);
         }
         return super.onOptionsItemSelected(item);
     }

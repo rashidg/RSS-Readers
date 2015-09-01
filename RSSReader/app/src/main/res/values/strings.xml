@@ -7,8 +7,6 @@
     <string name="title_activity_lang">RSS Reader</string>
     <string name="title_activity_search">RSS Reader</string>
     <string name="title_activity_results">RSS Reader</string>
-    <string name="title_activity_storage">StorageActivity</string>
-
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_stored_news">StoredNewsActivity</string>>
+    <string name="title_activity_storage">RSS Reader</string>
+    <string name="title_activity_stored_news">StoredNewsActivity</string>
 </resources>

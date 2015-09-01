@@ -51,7 +51,9 @@ public class MainActivity extends ActionBarActivity implements Serializable {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                arg1.setBackgroundColor(Color.LTGRAY);
+                //arg1.setBackgroundColor(Color.RED);
+
+                System.out.println("position = " + Integer.toString(position));
                 Application current_app = (Application) listApps.getItemAtPosition(position);
                 Intent i = new Intent(listApps.getContext(), NewsActivity.class);
                 i.putExtra("app11", current_app);
@@ -91,7 +93,7 @@ public class MainActivity extends ActionBarActivity implements Serializable {
                 } else {
                     Log.d("MainActivity", "Error parsing file");
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(MainActivity.this);
-                    builder1.setMessage("Couldn't get the feed.\nNo internet connection.");
+                    builder1.setMessage("Can't get the feed.\nNo internet connection.");
                     builder1.setCancelable(true);
                     builder1.setPositiveButton("Ok",
                             new DialogInterface.OnClickListener() {
@@ -144,7 +146,7 @@ public class MainActivity extends ActionBarActivity implements Serializable {
 
     private class DownloadData extends AsyncTask<String,Void, String>{
 
-        String myXmlData;
+        String myXmlData = "";
 
         protected String doInBackground(String... urls) {
             try {

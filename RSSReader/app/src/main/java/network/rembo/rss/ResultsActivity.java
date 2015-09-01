@@ -33,7 +33,7 @@ public class ResultsActivity extends ActionBarActivity {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                arg1.setBackgroundColor(Color.LTGRAY);
+                //arg1.setBackgroundColor(Color.LTGRAY);
                 Application current_app = (Application) lv.getItemAtPosition(position);
                 Intent i = new Intent(lv.getContext(), NewsActivity.class);
                 i.putExtra("app11", current_app);
